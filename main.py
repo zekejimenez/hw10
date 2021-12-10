@@ -5,10 +5,10 @@ from PyQt5.QtWidgets import *
 
 from hw10_ui import *
 
-led = 18
-button = 17
+led = 12
+button = 11
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(led,GPIO.out,initial=GPIO.LOW)
+GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
@@ -22,12 +22,11 @@ class Window(QMainWindow, Ui_MainWindow):
                 pass
 
         GPIO.add_event_detect(button, GPIO.RISING)
-        GPIO.add_event_detect(button, GPIO.FALLING)
         GPIO.add_event_callback(button, my_callback)
 
     def connectsignalslots(self):
-        self.pushButton.clicked.connect(lambda: self.switch_LED())
-        
+        self.pushButton.pressed.connect(lambda: GPIO.output(led, GPIO.HIGH))
+        self.pushButton.released.connect(lambda: GPIO.output(led, GPIO.LOW))
 
     def switch_LED(self):
         if GPIO.read(led) == 0:
