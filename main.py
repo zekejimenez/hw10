@@ -9,7 +9,7 @@ led = 12
 button = 40
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
-GPIO.setup(button, GPIO.IN)
+GPIO.setup(button, GPIO.IN, initial=GPIO.LOW)
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
