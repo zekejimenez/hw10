@@ -21,9 +21,11 @@ class Window(QMainWindow, Ui_MainWindow):
                 self.radioButton.setChecked(False)
             else:
                 self.radioButton.setChecked(True)
+            pass
 
-        GPIO.add_event_detect(button, GPIO.RISING)
+        GPIO.add_event_detect(button, GPIO.BOTH)
         GPIO.add_event_callback(button, my_callback)
+
         self.connectsignalslots()
 
     def connectsignalslots(self):
