@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import *
 from hw10_ui import *
 
 led = 12
-button = 11
+button = 40
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
 GPIO.setup(button, GPIO.IN)
