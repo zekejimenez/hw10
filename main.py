@@ -9,6 +9,7 @@ led = 12
 button = 11
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(led,GPIO.OUT,initial=GPIO.LOW)
+GPIO.setup(button, GPIO.IN)
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self, parent = None):
@@ -16,13 +17,14 @@ class Window(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         def my_callback():
-            if GPIO.read(button) == 0:
-                self.radioButton.nextCheckState()
+            if self.radioButton.isChecked():
+                self.radioButton.setChecked(False)
             else:
-                pass
+                self.radioButton.setChecked(True)
 
         GPIO.add_event_detect(button, GPIO.RISING)
         GPIO.add_event_callback(button, my_callback)
+        self.connectsignalslots()
 
     def connectsignalslots(self):
         self.pushButton.pressed.connect(lambda: GPIO.output(led, GPIO.HIGH))
